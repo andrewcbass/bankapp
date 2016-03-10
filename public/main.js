@@ -38,6 +38,15 @@ angular.module('myApp', [])
       return sum;
     }
 
+    //sort transactions by date
+    $scope.predicate = 'date';
+    $scope.reverse = true;
+    $scope.order = function(predicate) {
+      $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+    $scope.predicate = predicate;
+    };
+    
+
     //add new deposit, first add new credit key and remove amount key
     $scope.deposit = function() {
       $scope.newDebit.credit = $scope.newDebit.amount;
