@@ -45,49 +45,51 @@ angular.module('myApp', [])
       $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
     $scope.predicate = predicate;
     };
-    
+
 
     //add new deposit, first add new credit key and remove amount key
     $scope.deposit = function() {
-      $scope.newDebit.credit = $scope.newDebit.amount;
-      delete $scope.newDebit.amount;
-      var debit = angular.copy($scope.newDebit);
+      if($scope.newDebit.amount && $scope.newDebit.desc) {
 
-      $http.post('/debits', $scope.newDebit)
-      .then(function(res){
-        //if success, load to dom
-        $scope.debitList.push(debit);
-        $scope.newDebit = {};
-      },
-      function(err) {
-        console.log('ERR', err);
-      })
+        $scope.newDebit.credit = $scope.newDebit.amount;
+        delete $scope.newDebit.amount;
+        var debit = angular.copy($scope.newDebit);
 
+        $http.post('/debits', $scope.newDebit)
+        .then(function(res){
+          //if success, load to dom
+          $scope.debitList.push(debit);
+          $scope.newDebit = {};
+        },
+        function(err) {
+          console.log('ERR', err);
+        })
+      }
 
     }
 
     //add new withdrawal, first add new debit key and remove amount key
     $scope.withdrawal = function() {
-      $scope.newDebit.debit = ($scope.newDebit.amount);
-      delete $scope.newDebit.amount;
-      var debit = angular.copy($scope.newDebit);
+      if($scope.newDebit.amount && $scope.newDebit.desc) {
+        $scope.newDebit.debit = ($scope.newDebit.amount);
+        delete $scope.newDebit.amount;
+        var debit = angular.copy($scope.newDebit);
 
-      $http.post('/debits', $scope.newDebit)
-      .then(function(res){
-        //if success, load to dom
-        $scope.debitList.push(debit);
-        $scope.newDebit = {};
-      },
-      function(err) {
-        console.log('ERR', err);
-      })
-
+        $http.post('/debits', $scope.newDebit)
+        .then(function(res){
+          //if success, load to dom
+          $scope.debitList.push(debit);
+          $scope.newDebit = {};
+        },
+        function(err) {
+          console.log('ERR', err);
+        })
+      }
     }
 
     //delete item after adding
     $scope.deleteDebit = function (debit) {
       var id = debit.id;
-      var index = this.$index;
 
       $http.delete(`/debits/${id}`)
       .then(function(res) {

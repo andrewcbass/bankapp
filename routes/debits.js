@@ -13,7 +13,6 @@ router.get('/', function(req, res) {
       res.status(400).send(err);
       return;
     } else {
-    console.log(debits);
     res.send(debits);
     }
   })

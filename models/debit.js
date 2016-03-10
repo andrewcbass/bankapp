@@ -17,7 +17,6 @@ Debit.get = function(cb) {
     }
 
     var debits = JSON.parse(data);
-    console.log(debits);
     cb(null, debits);
   });
 };
