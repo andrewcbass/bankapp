@@ -8,6 +8,7 @@ var debitsFile = path.join(__dirname, '../data/debits.json');
 
 var Debit = {};
 
+//get all transactions stored in debits.JSON
 Debit.get = function(cb) {
   fs.readFile(debitsFile, function(err, data) {
     if(err) {
@@ -21,10 +22,12 @@ Debit.get = function(cb) {
   });
 };
 
+//write objects to debits.JSON
 Debit.write = function(debits, cb) {
   fs.writeFile(debitsFile, JSON.stringify(debits), cb);
 };
 
+//create new object and send to debits.JSON
 Debit.create = function(newDebit, cb) {
   this.get((err, debits) => { //read and parse
     if(err) return cb(err);
@@ -36,6 +39,7 @@ Debit.create = function(newDebit, cb) {
   });
 };
 
+//remove object from debits.JSON
 Debit.delete = function(id, cb) {
   this.get((err, debits) => {
     if(err) return cb(err);

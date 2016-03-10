@@ -5,6 +5,7 @@ var router = express.Router();
 
 var Debit = require('../models/debit');
 
+//get objects from model, pass to app.js and frontend
 router.get('/', function(req, res) {
 
   Debit.get(function(err, debits) {
@@ -18,6 +19,7 @@ router.get('/', function(req, res) {
   })
 })
 
+//pass new trancaction to model, then recieve update and pass along
 router.post('/', function(req, res) {
   var newDebit = req.body;
 
@@ -30,6 +32,7 @@ router.post('/', function(req, res) {
   })
 });
 
+//pass id to model, confirm delete to frontend
 router.delete('/:id', function(req, res) {
   var id = req.params.id;
 

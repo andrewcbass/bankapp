@@ -10,6 +10,7 @@ angular.module('myApp', [])
       console.log('ERR', err);
     })
 
+    //find available balance to display at top of page
     $scope.total = function() {
       var sum = 0;
 
@@ -19,6 +20,7 @@ angular.module('myApp', [])
       return sum;
     }
 
+    //find sum of deposits, display at bottom of table
     $scope.creditTotal = function() {
       var sum = 0;
       $scope.debitList.forEach(function(obj) {
@@ -27,6 +29,7 @@ angular.module('myApp', [])
       return sum;
     }
 
+    //find sum of withdrawals, display at bottom of table
     $scope.debitTotal = function() {
       var sum = 0;
       $scope.debitList.forEach(function(obj) {
@@ -35,7 +38,7 @@ angular.module('myApp', [])
       return sum;
     }
 
-    //add new debit
+    //add new deposit, first add new credit key and remove amount key
     $scope.deposit = function() {
       $scope.newDebit.credit = $scope.newDebit.amount;
       delete $scope.newDebit.amount;
@@ -54,6 +57,7 @@ angular.module('myApp', [])
 
     }
 
+    //add new withdrawal, first add new debit key and remove amount key
     $scope.withdrawal = function() {
       $scope.newDebit.debit = ($scope.newDebit.amount);
       delete $scope.newDebit.amount;
@@ -71,6 +75,7 @@ angular.module('myApp', [])
 
     }
 
+    //delete item after adding
     $scope.deleteDebit = function (debit) {
       var id = debit.id;
       var index = this.$index;
